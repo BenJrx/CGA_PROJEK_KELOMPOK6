@@ -5,7 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    public void GameStart() {
-        SceneManager.LoadSceneAsync("Main Stage");
+    public void Stage1Start() {
+        SceneManager.LoadSceneAsync("Stage1");
     }
+
+    public void Stage2Start() {
+        SceneManager.LoadSceneAsync("Stage2");
+    }
+
 }
