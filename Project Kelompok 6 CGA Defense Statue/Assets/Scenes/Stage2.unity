@@ -488,6 +488,60 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6d08b71d0d306c4bb31f80a0e885be6, type: 3}
+--- !u!1 &262853180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 262853182}
+  - component: {fileID: 262853181}
+  m_Layer: 0
+  m_Name: Minion Spawner (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &262853181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262853180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba149ec0d6a9db94eaf7cb4c46da680e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minionMoveSpeed: 5
+  superMinionMoveSpeed: 5
+  minionPrefab: {fileID: 8284184123266415937, guid: 7a26b586facd6fe42ab2025413c23681, type: 3}
+  superMinionPrefab: {fileID: 6956398888551279883, guid: 3f6712461e882284a9e568c4d337c2c5, type: 3}
+  spawnPoints:
+  - {fileID: 262853182}
+  spawnInterval: 20
+  minionsPerWave: 6
+  wavesUntilSuperMinion: 3
+  delayBetweenMinions: 1
+--- !u!4 &262853182
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262853180}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.825, z: -45.83}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &377574100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -818,7 +872,7 @@ Transform:
   m_GameObject: {fileID: 872165454}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.82, z: 45.525}
+  m_LocalPosition: {x: 0, y: 0.825, z: 45.525}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1713,6 +1767,60 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6d08b71d0d306c4bb31f80a0e885be6, type: 3}
+--- !u!1 &1474379523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1474379525}
+  - component: {fileID: 1474379524}
+  m_Layer: 0
+  m_Name: Minion Spawner (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1474379524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474379523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba149ec0d6a9db94eaf7cb4c46da680e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minionMoveSpeed: 5
+  superMinionMoveSpeed: 5
+  minionPrefab: {fileID: 8284184123266415937, guid: 7a26b586facd6fe42ab2025413c23681, type: 3}
+  superMinionPrefab: {fileID: 6956398888551279883, guid: 3f6712461e882284a9e568c4d337c2c5, type: 3}
+  spawnPoints:
+  - {fileID: 1474379525}
+  spawnInterval: 20
+  minionsPerWave: 6
+  wavesUntilSuperMinion: 3
+  delayBetweenMinions: 1
+--- !u!4 &1474379525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474379523}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -45.36, y: 0.825, z: -1.24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1512850119
 GameObject:
   m_ObjectHideFlags: 0
@@ -2359,6 +2467,60 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35cb40a8633fa9640aae958f1e2c97c0, type: 3}
+--- !u!1 &1969804876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1969804878}
+  - component: {fileID: 1969804877}
+  m_Layer: 0
+  m_Name: Minion Spawner (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1969804877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969804876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba149ec0d6a9db94eaf7cb4c46da680e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minionMoveSpeed: 5
+  superMinionMoveSpeed: 5
+  minionPrefab: {fileID: 8284184123266415937, guid: 7a26b586facd6fe42ab2025413c23681, type: 3}
+  superMinionPrefab: {fileID: 6956398888551279883, guid: 3f6712461e882284a9e568c4d337c2c5, type: 3}
+  spawnPoints:
+  - {fileID: 1969804878}
+  spawnInterval: 20
+  minionsPerWave: 6
+  wavesUntilSuperMinion: 3
+  delayBetweenMinions: 1
+--- !u!4 &1969804878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969804876}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 44.87, y: 0.825, z: -1.24}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2035776480
 GameObject:
   m_ObjectHideFlags: 0
@@ -2527,5 +2689,8 @@ SceneRoots:
   - {fileID: 1687237781}
   - {fileID: 1299666634}
   - {fileID: 872165455}
+  - {fileID: 262853182}
+  - {fileID: 1474379525}
+  - {fileID: 1969804878}
   - {fileID: 49448003}
   - {fileID: 3365398}
