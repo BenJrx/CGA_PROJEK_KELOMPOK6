@@ -42,7 +42,7 @@ public class FreeCam : MonoBehaviour
             transform.position = transform.position + (transform.up * movementSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftControl))
         {
             transform.position = transform.position + (-transform.up * movementSpeed * Time.deltaTime);
         }
