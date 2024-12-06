@@ -22,12 +22,13 @@ public class KnightController : MonoBehaviour
 
     void Update()
     {
-        Movement ();
-        GetInput ();
+        Movement();
+        GetInput();
     }
 
     void Movement()
     {
+        Debug.Log(controller.isGrounded);
         if (controller.isGrounded)
         {
             if (Input.GetKey(KeyCode.W))
@@ -38,13 +39,12 @@ public class KnightController : MonoBehaviour
                 }
                 else if (anim.GetBool("attacking") == false)
                 {
+                    anim.SetBool("running", true);
+                    anim.SetInteger("condition", 1);
 
-                anim.SetBool("running", true);
-                anim.SetInteger("condition", 1);
-
-                moveDir = new Vector3(0, 0, 1);
-                moveDir *= speed;
-                moveDir = transform.TransformDirection(moveDir);
+                    moveDir = new Vector3(0, 0, 1);
+                    moveDir *= speed;
+                    moveDir = transform.TransformDirection(moveDir);
                 }
             }
             else

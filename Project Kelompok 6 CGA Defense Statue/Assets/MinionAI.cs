@@ -21,7 +21,7 @@ public class MinionAI : MonoBehaviour
     public float walkSpeed;
 
     private void Awake(){
-        player = GameObject.Find("PlayerObj").transform;
+        player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         // agent.baseOffset = 1f - 0.0833333f;
         agent.speed = walkSpeed;
@@ -31,7 +31,18 @@ public class MinionAI : MonoBehaviour
     private void Update(){
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        Debug.Log(playerInSightRange+" "+playerInAttackRange+" "+walkPointSet);
         if(!playerInSightRange && !playerInAttackRange) ToStatue();
+        else if(playerInSightRange && !playerInAttackRange) ToPlayer();
+        else if(playerInAttackRange) AttackPlayer();
+    }
+
+    private void ToPlayer(){
+
+    }
+
+    private void AttackPlayer(){
+        
     }
 
     private void ToStatue(){
