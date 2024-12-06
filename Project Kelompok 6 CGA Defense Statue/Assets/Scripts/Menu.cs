@@ -12,5 +12,11 @@ public class Menu : MonoBehaviour
     public void Stage2Start() {
         SceneManager.LoadSceneAsync("Stage2");
     }
+    public void Stage3Start() {
+        SceneManager.LoadSceneAsync("Stage3");
+    }
+    public void Stage4Start() {
+        SceneManager.LoadSceneAsync("Stage4");
+    }
 
 }
