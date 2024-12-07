@@ -25,13 +25,12 @@ public class MinionAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         // agent.baseOffset = 1f - 0.0833333f;
         agent.speed = walkSpeed;
-        Debug.Log(statue); 
     }
 
     private void Update(){
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-        Debug.Log(playerInSightRange+" "+playerInAttackRange+" "+walkPointSet);
+        // Debug.Log(playerInSightRange+" "+playerInAttackRange+" "+walkPointSet);
         if(!playerInSightRange && !playerInAttackRange) ToStatue();
         else if(playerInSightRange && !playerInAttackRange) ToPlayer();
         else if(playerInAttackRange) AttackPlayer();
@@ -58,5 +57,6 @@ public class MinionAI : MonoBehaviour
             walkPoint = hit.position;
             walkPointSet = true;
         }
+        Debug.Log(NavMesh.SamplePosition(statue.position, out hit, 1.0f, NavMesh.AllAreas));
     }
 }
