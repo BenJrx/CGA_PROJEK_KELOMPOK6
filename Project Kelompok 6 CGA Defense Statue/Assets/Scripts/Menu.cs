@@ -19,12 +19,4 @@ public class Menu : MonoBehaviour
         SceneManager.LoadSceneAsync("Stage4");
     }
 
-    public void Stage3Start() {
-        SceneManager.LoadSceneAsync("Stage3");
-    }
-
-    public void Stage4Start() {
-        SceneManager.LoadSceneAsync("Stage4");
-    }
-
 }
