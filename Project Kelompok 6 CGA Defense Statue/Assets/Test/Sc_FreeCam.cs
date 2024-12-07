@@ -52,7 +52,8 @@ public class Sc_FreeCam : MonoBehaviour
         CameraScrolling();
     }
 
-    void CameraScrolling(){
+    void CameraScrolling()
+    {
         float scrollInput = Input.GetAxis("Mouse ScrollWheel");
         distance -= scrollInput * 10f;
         distance = Mathf.Clamp(distance, 5f, 15f);
@@ -62,9 +63,15 @@ public class Sc_FreeCam : MonoBehaviour
         RaycastHit hit;
         Vector3 direction = desiredPosition - player.position;
 
-        if (Physics.Raycast(player.position, direction.normalized, out hit, distance, whatIsGround | whatIsWall)){
-            desiredPosition = hit.point;
+        // Adjust camera position if there's an obstacle between the camera and the player
+        if (Physics.Raycast(player.position, direction.normalized, out hit, distance, whatIsGround | whatIsWall))
+        {
+            // Set the camera closer to the player if it collides with the ground or walls
+            desiredPosition = player.position + direction.normalized * (hit.distance - 0.2f); // Adjust slightly to avoid clipping
         }
+
+        // Ensure the camera doesn't go below the player's feet level
+        desiredPosition.y = Mathf.Max(desiredPosition.y, player.position.y + 1.0f); // Adjust Y to stay above the ground
 
         transform.position = desiredPosition;
         transform.LookAt(player);
@@ -72,7 +79,6 @@ public class Sc_FreeCam : MonoBehaviour
 
     void ShiftLockCamera()
     {
-        // Scroll to adjust camera distance
         float scrollInput = Input.GetAxis("Mouse ScrollWheel");
         distance -= scrollInput * 10f;
         distance = Mathf.Clamp(distance, 5f, 15f);
@@ -83,24 +89,30 @@ public class Sc_FreeCam : MonoBehaviour
 
         // Rotate the camera vertically (up/down) without affecting the player's rotation
         float mouseY = Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
-        currentVerticalAngle -= mouseY; // Invert Y-axis movement for a natural feel
-        currentVerticalAngle = Mathf.Clamp(currentVerticalAngle, -40f, 85f); // Limit the vertical angle
+        currentVerticalAngle -= mouseY;
+        currentVerticalAngle = Mathf.Clamp(currentVerticalAngle, -40f, 85f);
 
-        // Calculate camera position based on distance and rotation
         Vector3 cameraOffset = player.position - player.forward * (distance - 2f);
         cameraOffset.y += 1f;
 
-        // Apply the vertical rotation
-        Quaternion rotation = Quaternion.Euler(currentVerticalAngle, player.eulerAngles.y, 0f);
+        // Calculate the desired position
+        Vector3 desiredPosition = cameraOffset;
 
-        // Adjust the camera position based on collisions with walls or the ground
+        // Raycast to detect obstacles
         RaycastHit hit;
-        if (Physics.Raycast(player.position, cameraOffset - player.position, out hit, distance, whatIsGround | whatIsWall))
-            transform.position = hit.point;
-        else
-            transform.position = cameraOffset;
+        Vector3 direction = desiredPosition - player.position;
+        if (Physics.Raycast(player.position, direction.normalized, out hit, distance, whatIsGround | whatIsWall))
+        {
+            desiredPosition = player.position + direction.normalized * (hit.distance - 0.2f); // Adjust slightly to avoid clipping
+        }
 
-        // Apply the rotation to the camera and make it look at the player (or another target)
+        // Ensure the camera doesn't dip below the player's position
+        desiredPosition.y = Mathf.Max(desiredPosition.y, player.position.y + 1.0f);
+
+        transform.position = desiredPosition;
+
+        // Apply the rotation and look at the target
+        Quaternion rotation = Quaternion.Euler(currentVerticalAngle, player.eulerAngles.y, 0f);
         transform.rotation = rotation;
         transform.LookAt(thirdPersonLookAt.position);
     }

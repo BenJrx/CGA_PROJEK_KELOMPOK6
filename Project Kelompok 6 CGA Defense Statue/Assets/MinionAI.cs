@@ -5,126 +5,58 @@ using UnityEngine.AI;
 
 public class MinionAI : MonoBehaviour
 {
-    private NavMeshAgent agent;
-    private Transform currentTarget;
+    public NavMeshAgent agent;
+    public Transform player, statue;
+    public LayerMask whatIsGround, whatIsPlayer;
 
-    public string enemyMinionTag = "EnemyMinion";
-    public string turretTag = "Turret";
-    public float stopDistance = 2.0f;
-    public float aggroRange = 5.0f; // Adjust the range at which minions detect enemies.
-    public float targetSwitchInterval = 2.0f; // Adjust the interval for checking and switching targets.
+    public Vector3 walkPoint, distanceToWalkPoint;
+    bool walkPointSet;
+    public float walkPointRange;
 
-    private float timeSinceLastTargetSwitch = 0.0f;
+    public float timeBetweenAttacks;
+    bool alreadyAttacked;
+    public float sightRange, attackRange;
+    public bool playerInSightRange, playerInAttackRange;
 
-    private void Start()
-    {
+    public float walkSpeed;
+
+    private void Awake(){
+        player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
-        FindAndSetTarget();
+        // agent.baseOffset = 1f - 0.0833333f;
+        agent.speed = walkSpeed;
+        Debug.Log(statue); 
     }
 
-    private void Update()
-    {
-        if (currentTarget != null)
-        {
-            agent.SetDestination(currentTarget.position);
-
-            // Stop moving if within range of the target.
-            if (Vector3.Distance(transform.position, currentTarget.position) <= stopDistance)
-            {
-                agent.isStopped = true;
-            }
-            else
-            {
-                agent.isStopped = false;
-            }
-        }
-
-        // Check for a new target periodically.
-        timeSinceLastTargetSwitch += Time.deltaTime;
-        if (timeSinceLastTargetSwitch >= targetSwitchInterval)
-        {
-            timeSinceLastTargetSwitch = 0.0f;
-            CheckAndSwitchTargets();
-        }
+    private void Update(){
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        Debug.Log(playerInSightRange+" "+playerInAttackRange+" "+walkPointSet);
+        if(!playerInSightRange && !playerInAttackRange) ToStatue();
+        else if(playerInSightRange && !playerInAttackRange) ToPlayer();
+        else if(playerInAttackRange) AttackPlayer();
     }
 
-    private void CheckAndSwitchTargets()
-    {
-        // Search for the closest enemy minion or turret within aggroRange.
-        GameObject[] enemyMinions = GameObject.FindGameObjectsWithTag(enemyMinionTag);
-        Transform closestEnemy = GetClosestObjectInRadius(enemyMinions, aggroRange);
+    private void ToPlayer(){
 
-        if (closestEnemy != null)
-        {
-            currentTarget = closestEnemy;
-            return;
-        }
-
-        // If no enemy minions are in range, check for turrets.
-        GameObject[] turrets = GameObject.FindGameObjectsWithTag(turretTag);
-        Transform closestTurret = GetClosestObjectInRadius(turrets, aggroRange);
-
-        if (closestTurret != null)
-        {
-            currentTarget = closestTurret;
-        }
     }
 
-    private Transform GetClosestObject(GameObject[] objects)
-    {
-        Transform closest = null;
-        float closestDistance = Mathf.Infinity;
-
-        foreach (GameObject obj in objects)
-        {
-            float distance = Vector3.Distance(transform.position, obj.transform.position);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closest = obj.transform;
-            }
-        }
-
-        return closest;
+    private void AttackPlayer(){
+        
     }
 
-    private Transform GetClosestObjectInRadius(GameObject[] objects, float radius)
-    {
-        Transform closest = null;
-        float closestDistance = radius;
-
-        foreach (GameObject obj in objects)
-        {
-            float distance = Vector3.Distance(transform.position, obj.transform.position);
-            if (distance <= radius && distance < closestDistance)
-            {
-                closestDistance = distance;
-                closest = obj.transform;
-            }
-        }
-
-        return closest;
+    private void ToStatue(){
+        if(!walkPointSet) SetMoveToStatue();
+        else if(distanceToWalkPoint.magnitude > attackRange) agent.SetDestination(walkPoint);
+        else agent.isStopped = true;
+        distanceToWalkPoint = transform.position - walkPoint;
     }
 
-    private void FindAndSetTarget()
-    {
-        // Check for enemy minions first.
-        GameObject[] enemyMinions = GameObject.FindGameObjectsWithTag(enemyMinionTag);
-        Transform closestEnemy = GetClosestObjectInRadius(enemyMinions, aggroRange);
-
-        if (closestEnemy != null)
-        {
-            currentTarget = closestEnemy;
-            return;
-        }
-
-        // If no enemy minions are found, check for turrets.
-        GameObject[] turrets = GameObject.FindGameObjectsWithTag(turretTag);
-        Transform closestTurret = GetClosestObjectInRadius(turrets, aggroRange);
-
-        if (closestTurret != null)
-        {
-            currentTarget = closestTurret;
+    private void SetMoveToStatue(){
+        NavMeshHit hit;
+        if(NavMesh.SamplePosition(statue.position, out hit, 1.0f, NavMesh.AllAreas)){
+            walkPoint = hit.position;
+            walkPointSet = true;
         }
     }
 }
